@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 const profileController = require('../controllers/profileController');
 
-router.post('/profile_register', profileController.profileRegister);
+const upload = multer({ dest: 'uploads/' });
+
+
+router.post('/profile_register', upload.array('files'), profileController.profileRegister);
 router.get('/profiles', profileController.getProfiles);
 
 module.exports = router;
