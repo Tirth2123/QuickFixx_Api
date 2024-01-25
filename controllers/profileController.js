@@ -3,7 +3,7 @@ const Profile = require('../models/profileModel');
 const Review = require('../models/reviewModel');
 
 exports.profileRegister = async (req, res) => {
-  const { serviceProviderId, phoneNo, companyName, service, whatsappNumber, experience, address } = req.body; 
+  const { serviceProviderId, emailId, phoneNo, companyName, service, whatsappNumber, experience, address } = req.body; 
   const images = req.files.map(file => file.path); 
   
   const existingProfile = await Profile.findOne({ whatsappNumber: whatsappNumber });
@@ -11,7 +11,7 @@ exports.profileRegister = async (req, res) => {
     return res.status(409).send('Profile with this phone number already exists');
   }
 
-  const profile = new Profile({ serviceProviderId,emailId, phoneNo, companyName, service, whatsappNumber, experience, address, images }); 
+  const profile = new Profile({ serviceProviderId, emailId, phoneNo, companyName, service, whatsappNumber, experience, address, images }); 
   await profile.save();
   res.send('Profile registered successfully');
 };
