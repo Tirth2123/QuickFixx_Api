@@ -5,14 +5,10 @@ const serviceProviderRoutes = require('./routes/serviceProviderRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 
-//require('dotenv').config();
-
 const app = express();
 app.use(express.json());
 
 mongoose.connect('mongodb+srv://tirthshsh2123:tirth2123@cluster0.cbn7ivh.mongodb.net/');
-
-//mongoose.connect(process.env.MONGO_URI);
 
 app.use('/api/user', userRoutes);
 app.use('/api/provider', serviceProviderRoutes);

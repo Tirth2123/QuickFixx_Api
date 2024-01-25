@@ -8,7 +8,6 @@ const upload = multer({ dest: 'uploads/' });
 
 router.post('/profile_register', upload.array('images'), profileController.profileRegister);
 router.get('/profiles', profileController.getProfiles);
-router.get('/profile/:phoneNo', profileController.getProfile);
-
+router.get('/profile/:phoneNo', profileController.getProfileByPhoneNo);
 
 module.exports = router;

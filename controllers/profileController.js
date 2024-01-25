@@ -30,12 +30,11 @@ exports.getProfiles = async (req, res) => {
   res.send(profilesWithRatings);
 };
 
-exports.getProfile = async (req, res) => {
+exports.getProfileByPhoneNo = async (req, res) => {
   const phoneNo = req.params.phoneNo;
   const profile = await Profile.findOne({ phoneNo: phoneNo });
-  if (profile) {
-      res.json(profile);
-  } else {
-      res.status(404).send('Profile not found');
+  if (!profile) {
+    return res.status(404).send('Profile not found');
   }
+  res.send(profile);
 };
