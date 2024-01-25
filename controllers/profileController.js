@@ -11,7 +11,7 @@ exports.profileRegister = async (req, res) => {
     return res.status(409).send('Profile with this phone number already exists');
   }
 
-  const profile = new Profile({ serviceProviderId, phoneNo, companyName, service, whatsappNumber, experience, address, images }); 
+  const profile = new Profile({ serviceProviderId,emailId, phoneNo, companyName, service, whatsappNumber, experience, address, images }); 
   await profile.save();
   res.send('Profile registered successfully');
 };
@@ -30,11 +30,12 @@ exports.getProfiles = async (req, res) => {
   res.send(profilesWithRatings);
 };
 
-exports.getProfileByPhoneNo = async (req, res) => {
-  const phoneNo = req.params.phoneNo;
-  const profile = await Profile.findOne({ phoneNo: phoneNo });
+exports.getProfileByEmailId = async (req, res) => {
+  const emailId = req.params.emailId;  
+  const profile = await Profile.findOne({ emailId: emailId });  
   if (!profile) {
     return res.status(404).send('Profile not found');
   }
   res.send(profile);
 };
+
