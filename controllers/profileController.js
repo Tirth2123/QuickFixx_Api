@@ -39,3 +39,24 @@ exports.getProfileByEmailId = async (req, res) => {
   res.send(profile);
 };
 
+exports.profileUpdate = async (req, res) => {
+  const emailId = req.params.emailId;
+  const { companyName, service, whatsappNumber, experience, address } = req.body;
+  const images = req.files.map(file => file.path);
+
+  const profile = await Profile.findOne({ emailId: emailId });
+  if (!profile) {
+    return res.status(404).send('Profile not found');
+  }
+
+  profile.companyName = companyName;
+  profile.service = service;
+  profile.whatsappNumber = whatsappNumber;
+  profile.experience = experience;
+  profile.address = address;
+  profile.images = images;
+
+  await profile.save();
+  res.send('Profile updated successfully');
+};
+
