@@ -52,7 +52,6 @@ exports.profileUpdate = async (req, res) => {
   if (req.files) {
       images = req.files.map(file => file.path);
   } else {
-      // If no new images are uploaded, keep the old images
       images = profile.images;
   }
 
