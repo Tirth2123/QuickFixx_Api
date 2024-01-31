@@ -43,16 +43,17 @@ exports.profileUpdate = async (req, res) => {
   const emailId = req.params.emailId;
   const { companyName, service, whatsappNumber, experience, address } = req.body;
 
+  const profile = await Profile.findOne({ emailId: emailId });
+  if (!profile) {
+    return res.status(404).send('Profile not found');
+  }
+
   let images;
   if (req.files) {
       images = req.files.map(file => file.path);
   } else {
+      // If no new images are uploaded, keep the old images
       images = profile.images;
-  }
-
-  const profile = await Profile.findOne({ emailId: emailId });
-  if (!profile) {
-    return res.status(404).send('Profile not found');
   }
 
   profile.companyName = companyName;
@@ -65,4 +66,3 @@ exports.profileUpdate = async (req, res) => {
   await profile.save();
   res.send('Profile updated successfully');
 };
-
