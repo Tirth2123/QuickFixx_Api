@@ -42,7 +42,13 @@ exports.getProfileByEmailId = async (req, res) => {
 exports.profileUpdate = async (req, res) => {
   const emailId = req.params.emailId;
   const { companyName, service, whatsappNumber, experience, address } = req.body;
-  const images = req.files.map(file => file.path);
+
+  let images;
+  if (req.files) {
+      images = req.files.map(file => file.path);
+  } else {
+      images = profile.images;
+  }
 
   const profile = await Profile.findOne({ emailId: emailId });
   if (!profile) {
