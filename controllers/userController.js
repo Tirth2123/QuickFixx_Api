@@ -50,8 +50,8 @@ exports.sendOtp = async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'Add your mail',
-      pass: 'Add your Pass',
+      user: 'temporary.mail.21temp@gmail.com',
+      pass: 'myue zlhn riqu qwgz',
     },
   });
 
