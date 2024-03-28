@@ -30,7 +30,7 @@ exports.providerLogin = async (req, res) => {
     return res.status(400).send('Invalid password');
   }
   const token = jwt.sign({ _id: provider._id }, 'secret_key');
-  res.send({ token });
+  res.send({ token, name: provider.name });
 };
 
 exports.providerSendOtp = async (req, res) => {
